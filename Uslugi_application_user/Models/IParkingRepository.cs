@@ -12,7 +12,7 @@ namespace Uslugi_application_user.Models
     {
         DataTable GetAllReservationUsers(NetworkCredential credentital);
         void AddReservation(ParkingModel parkModel);
-        bool ChekReservParkingNumber(string dataStart, string dataEnd, string parkingNumber); //Смотрим, свободно ли месть прям в момент резервации 
+        bool ChekReservParkingNumber(string dataStart, string dataEnd, string parkingNumber); 
         void RemoveReservation(string startTime, string endTime);
         DataTable addListPark();
 
