@@ -1,0 +1,750 @@
+﻿<UserControl x:Class="Uslugi_application_user.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Uslugi_application_user.Views"
+              xmlns:viewModel="clr-namespace:Uslugi_application_user.ViewModels" 
+             xmlns:fa="http://schemas.awesome.incremented/wpf/xaml/fontawesome.sharp" 
+             xmlns:customscontrols="clr-namespace:Uslugi_application_user.CustomsControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="490" d:DesignWidth="700">
+    <UserControl.DataContext>
+        <viewModel:MainViewModel/>
+    </UserControl.DataContext>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="175"/>
+            <ColumnDefinition Width="175"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+
+        <StackPanel Grid.Column="0"
+                   >
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Button 
+            x:Name="changeData"
+                    BorderThickness="0"
+                Grid.Row="1"
+                            Content="ZMIEŃ DANE"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montsterrat"
+                            Cursor="Hand"
+                            Click="changePasswd_Click"
+                Margin="0,0,0,0"
+                VerticalAlignment="Center"
+                >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#462AD8"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#28AEED"/>
+
+                                </Trigger>
+                            </Style.Triggers>
+
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="150" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button x:Name="removeAllReservation"
+                    BorderThickness="0"
+                    Grid.Row="2"
+                            Content="USUŃ REZERWACJE"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montsterrat"
+                            Cursor="Hand"
+                            Click="removeAllReservation_Click"
+                            Margin="0,0,0,0"
+                             VerticalAlignment="Center">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Red"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#28AEED"/>
+
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="150" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button x:Name="removeAccount"
+                    BorderThickness="0"
+                    Grid.Row="3"
+                            Content="USUŃ KONTO"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montsterrat"
+                            Cursor="Hand"
+                            Margin="0,0,0,0"
+                            Click="removeAccount_Click"
+                             VerticalAlignment="Center">
+                <Button.Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Background" Value="Red"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#28AEED"/>
+
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border Width="150" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            </Grid>
+        </StackPanel>
+        <StackPanel Grid.Column="0"
+                    Grid.Row="4"
+                    Width="5"
+                    Height="5"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Left">
+            <TextBlock x:Name="idUser"
+                Foreground="Transparent"
+                       FontSize="1"
+                       Text="{Binding CurrentUserAccount.Id}"/>
+            <TextBlock x:Name="UserLoginUser"
+                Foreground="Transparent"
+                       FontSize="1"
+                       Text="{Binding CurrentUserAccount.Username}"/>
+            <TextBlock x:Name="UserLastNameUser"
+                Foreground="Transparent"
+                       FontSize="1"
+                       Text="{Binding CurrentUserAccount.LastName}"/>
+            <TextBlock x:Name="UserNameUser"
+                Foreground="Transparent"
+                       FontSize="1"
+                       Text="{Binding CurrentUserAccount.Name}"/>
+            <TextBlock x:Name="MailUser"
+                Foreground="Transparent"
+                       FontSize="1"
+                       Text="{Binding CurrentUserAccount.Email}"/>
+            <TextBlock x:Name="passUserEnd"
+                Foreground="Transparent"
+                       FontSize="1"
+                       Text="{Binding StringPass}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Button 
+            x:Name="changePass"
+                    Grid.Row="0"
+                    BorderThickness="0"
+                            Content="ZMIEŃ HASLO"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montsterrat"
+                            Cursor="Hand"
+                            Margin="0"
+                            Click="changePass_Click"
+                HorizontalAlignment="Center"
+                    Visibility="Collapsed"
+                VerticalAlignment="Center">
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#462AD8"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#28AEED"/>
+
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="150" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button 
+            x:Name="changeLogin"
+                    Grid.Row="1"
+                    BorderThickness="0"
+                            Content="ZMIEŃ LOGIN"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montsterrat"
+                            Cursor="Hand"
+                            Margin="0"
+                            Click="changeLogin_Click"
+                    HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                    Visibility="Collapsed"
+                    
+                        >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#462AD8"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#28AEED"/>
+
+                                </Trigger>
+                            </Style.Triggers>
+
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="150" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <Button 
+                    Grid.Row="2"
+            x:Name="changeDataOs"
+                    BorderThickness="0"
+                            Content="ZMIEŃ DANE OSOBOWE"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montsterrat"
+                            Cursor="Hand"
+                            Margin="0"
+                            Click="changeDataOs_Click"
+                    HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                    Visibility="Collapsed"
+
+                      
+                >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#462AD8"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#28AEED"/>
+
+                                </Trigger>
+                            </Style.Triggers>
+
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="150" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+                <Button Grid.Row="3"
+            x:Name="changeMail"
+                    BorderThickness="0"
+                            Content="ZMIEŃ E-MAIL"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montsterrat"
+                            Cursor="Hand"
+                            Margin="0"
+                            Click="changeMail_Click"
+                    HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                        Visibility="Collapsed"
+                        
+                      
+                >
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Background" Value="#462AD8"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#28AEED"/>
+
+                                </Trigger>
+                            </Style.Triggers>
+
+                        </Style>
+                    </Button.Style>
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border Width="150" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                                <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+
+                            </Border>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+            </Grid>
+        </StackPanel>
+        <StackPanel 
+                   Grid.Column="3"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center">
+            <TextBlock         Text="New Name"
+                               x:Name="txtBlockName"
+                               Foreground="Cyan"
+                               FontSize="12"
+                               FontFamily="Montserrat"
+                               Margin="0,5,15,0" 
+                              HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Visibility="Collapsed"
+                               />
+            <TextBox x:Name="txtNameUser"
+                             Text="{Binding Name, UpdateSourceTrigger=PropertyChanged}"
+                             FontSize="15"
+                             FontWeight="Medium"
+                             FontFamily="Montserrat"
+                             Foreground="White"
+                             CaretBrush="Cyan"
+                             BorderBrush="DarkCyan"
+                             BorderThickness="0,0,0,2"
+                             Height="40"
+                             Width="200"
+                             VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                             Margin="0,5,15,0"
+                      Visibility="Collapsed"
+                             >
+                <TextBox.Background>
+                    <ImageBrush ImageSource="/Images/nameIcon.png"
+                                        Stretch="None"
+                                        AlignmentX="Right"
+                                        />
+                </TextBox.Background>
+            </TextBox>
+            <TextBlock Text="New Last Name"
+                       x:Name="txtBlockLastName"
+                               Foreground="Cyan"
+                               FontSize="12"
+                               FontFamily="Montserrat"
+                        Visibility="Collapsed"
+                               Margin="0,5,15,0" 
+                               VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+            <TextBox x:Name="txtLastNameUser"
+                             Text="{Binding LastName, UpdateSourceTrigger=PropertyChanged}"
+                             FontSize="15"
+                             FontWeight="Medium"
+                             FontFamily="Montserrat"
+                             Foreground="White"
+                             CaretBrush="Cyan"
+                             BorderBrush="DarkCyan"
+                             BorderThickness="0,0,0,2"
+                             Height="40"
+                     Width="200"
+                             VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                      Visibility="Collapsed"
+                             Margin="0,5,15,0"
+                             >
+                <TextBox.Background>
+                    <ImageBrush ImageSource="/Images/nameIcon.png"
+                                        Stretch="None"
+                                        AlignmentX="Right"
+                                        />
+                </TextBox.Background>
+            </TextBox>
+            <TextBlock Text="New Username"
+                       x:Name="txtBlockUsername"
+                               Foreground="Cyan"
+                               FontSize="12"
+                               FontFamily="Montserrat"
+                               Margin="0,20,0,0" 
+                               VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                        Visibility="Collapsed"/>
+            <TextBox x:Name="txtLoginUser"
+                             Text="{Binding Username, UpdateSourceTrigger=PropertyChanged }"
+                             FontSize="15"
+                             FontWeight="Medium"
+                             FontFamily="Montserrat"
+                             Foreground="White"
+                             CaretBrush="Cyan"
+                             BorderBrush="DarkCyan"
+                             BorderThickness="0,0,0,2"
+                             Height="40"
+                     Width="200"
+                      Visibility="Collapsed"
+                             VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                             Margin="0,5,15,0"
+                             >
+                <TextBox.Background>
+                    <ImageBrush ImageSource="/Images/loginIcon.png"
+                                        Stretch="None"
+                                        AlignmentX="Right"
+                                        />
+                </TextBox.Background>
+            </TextBox>
+            <TextBlock Text="New Email"
+                       x:Name="txtBlockMail"
+                               Foreground="Cyan"
+                               FontSize="12"
+                               FontFamily="Montserrat"
+                               Margin="0,20,0,0" 
+                               VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                        Visibility="Collapsed"/>
+            <TextBox x:Name="txtEmailUser"
+                             Text="{Binding Mail, UpdateSourceTrigger=PropertyChanged}"
+                             FontSize="15"
+                             FontWeight="Medium"
+                             FontFamily="Montserrat"
+                             Foreground="White"
+                             CaretBrush="Cyan"
+                             BorderBrush="DarkCyan"
+                             BorderThickness="0,0,0,2"
+                      Visibility="Collapsed"
+                             Height="40"
+                     Width="200"
+                             VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                             Margin="0,0,10,0"
+                             >
+                <TextBox.Background>
+                    <ImageBrush ImageSource="/Images/mailIcon.png"
+                                        Stretch="None"
+                                        AlignmentX="Right"
+                                        />
+                </TextBox.Background>
+            </TextBox>
+            <TextBlock Text="Password"
+                       x:Name="txtBlockPass"
+                        Visibility="Collapsed"
+                               Foreground="Cyan"
+                               FontSize="12"
+                               FontFamily="Montserrat"
+                               Margin="0,20,0,0" 
+                               TextAlignment="Center"/>
+            <customscontrols:BindablePasswordBox x:Name="txtPassword"
+                Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                         Height="40"
+                                                 Width="200"
+                                                  Visibility="Collapsed"
+                                                 VerticalAlignment="Center"
+                                                 HorizontalAlignment="Center"
+                                                         Margin="0,5,15,0">
+            </customscontrols:BindablePasswordBox>
+            <TextBlock Text="New password"
+                       x:Name="txtBlockNewPass"
+                        Visibility="Collapsed"
+                               Foreground="Cyan"
+                               FontSize="12"
+                               FontFamily="Montserrat"
+                               Margin="0,20,0,0" 
+                               VerticalAlignment="Center"
+                       HorizontalAlignment="Center"/>
+            <customscontrols:BindablePasswordBox x:Name="txtNewPass"
+                Password="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                                         Height="40"
+                                                 Width="200"
+                                                 VerticalAlignment="Center"
+                                                 HorizontalAlignment="Center"
+                                                  Visibility="Collapsed"
+                                                         Margin="0,5,15,0">
+            </customscontrols:BindablePasswordBox>
+            <Button
+                     x:Name="appChangePass"
+                    BorderThickness="0"
+                            Content="POTWIERDZ"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montsterrat"
+                            Cursor="Hand"
+                            Margin="0,40,0,0"
+                            Click="appChangePass_Click"
+                    Visibility="Collapsed"
+                    HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+            
+                >
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#462AD8"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#28AEED"/>
+
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Width="150" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button
+                     x:Name="appChangeLog"
+                    BorderThickness="0"
+                            Content="POTWIERDZ"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montsterrat"
+                            Cursor="Hand"
+                            Margin="0,40,0,0"
+                            Click="appChangeLog_Click"
+                    HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Visibility="Collapsed"
+                >
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#462AD8"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#28AEED"/>
+
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Width="150" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button
+                     x:Name="appChangeDataOs"
+                    BorderThickness="0"
+                            Content="POTWIERDZ"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montsterrat"
+                            Cursor="Hand"
+                            Margin="0,40,0,0"
+                            Click="appChangeDataOs_Click"
+                    HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Visibility="Collapsed"
+                >
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#462AD8"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#28AEED"/>
+
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Width="150" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button
+                     x:Name="appChangeMail"
+                    BorderThickness="0"
+                            Content="POTWIERDZ"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montsterrat"
+                            Cursor="Hand"
+                            Margin="0,40,0,0"
+                            Click="appChangeMail_Click"
+                    HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Visibility="Collapsed"
+                >
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#462AD8"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#28AEED"/>
+
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Width="150" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button
+                     x:Name="appDelReserv"
+                    BorderThickness="0"
+                            Content="POTWIERDZ"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montsterrat"
+                            Cursor="Hand"
+                            Margin="0,40,0,0"
+                            Click="appDelReserv_Click"
+                    HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Visibility="Collapsed"
+                >
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#462AD8"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#28AEED"/>
+
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Width="150" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <Button
+                     x:Name="appDelAcc"
+                    BorderThickness="0"
+                            Content="POTWIERDZ"
+                            Foreground="White"
+                            FontSize="12"
+                            FontFamily="Montsterrat"
+                            Cursor="Hand"
+                            Margin="0,40,0,0"
+                            Click="appDelAcc_Click"
+                    HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Visibility="Collapsed"
+                >
+                <Button.Style>
+                    <Style TargetType="{x:Type Button}">
+                        <Setter Property="Background" Value="#462AD8"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#28AEED"/>
+
+                            </Trigger>
+                        </Style.Triggers>
+
+                    </Style>
+                </Button.Style>
+                <Button.Template>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border Width="150" Height="40"
+                                        CornerRadius="20"
+                                        Background="{TemplateBinding Background}">
+                            <ContentPresenter VerticalAlignment="Center"
+                                                      HorizontalAlignment="Center"/>
+
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+            <TextBlock  x:Name="errSettings"
+                       HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="12"
+                        FontFamily="Montserrat"
+                        Foreground="Red"
+                      />
+        </StackPanel>
+    </Grid>
+</UserControl>

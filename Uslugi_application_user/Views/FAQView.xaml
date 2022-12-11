@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="Uslugi_application_user.Views.FAQView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Uslugi_application_user.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Border BorderBrush="LightCyan" BorderThickness="2">
+            <StackPanel>
+                <TextBlock Text="Jak to działa?"
+                        Foreground="Cyan"
+                               FontSize="40"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"
+                               HorizontalAlignment="Center"
+                       Margin="10"
+                       TextAlignment="Center"
+                       TextWrapping="WrapWithOverflow"/>
+
+                <TextBlock Text="       Użytkownik może zarządzać aplikacją za pomocą menu po lewej stronie! W zależności od wybranej opcji użytkownik zobaczy odpowiednie interfejsy. W interfejsie DODAJ REZERWACJE użytkownik może zarezerwować mejsce parkingowe według wybranych kryterium oraz dostępności mejsc parkingowych. W interfejsie LISTA REZERWACJI użytkownik może zobaczyć wszystkie bieżące rezerwacje, posortowane według daty, rownież może usunąć wybrane rezerwacje. W ustawieniach użytkownik może zmienić dane konta (email, login, hasło, dane osobowe), również może usunąć konto i wszystkie rezerwację na raz w przypadku wiedzy aktualnego hasła. W przypadku braku wiedzy użytkownik musi zresetować hasło podczas logowania do aplikacji. Przycisk WYŁOGUJ zamknie aplikację. "
+                           Foreground="Cyan"
+                               FontSize="23"
+                               FontWeight="Medium"
+                               FontFamily="Montserrat"
+                               HorizontalAlignment="Center"
+                       Margin="5"
+                       TextWrapping="Wrap"
+                       TextAlignment="Justify"/>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>
