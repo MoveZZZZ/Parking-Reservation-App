@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -20,12 +21,12 @@ namespace Uslugi_application_user.Repositories
             using (var connection = GetConnection())
             using (var command = new MySqlCommand())
             {
-
+                string a = BCrypt.Net.BCrypt.HashPassword(SecureStringToString(userModel.Password));
                 connection.Open();
                 command.Connection = connection;
                 command.CommandText = "INSERT INTO users(`login`, `pass`, `name`, `surname`, `mail`) VALUES(@login, @password, @name, @surname, @m)";
                 command.Parameters.Add("@login", MySqlDbType.VarChar).Value = userModel.Username;
-                command.Parameters.Add("@password", MySqlDbType.VarChar).Value = SecureStringToString(userModel.Password);
+                command.Parameters.Add("@password", MySqlDbType.VarChar).Value =a;
                 command.Parameters.Add("@name", MySqlDbType.VarChar).Value = userModel.Name;
                 command.Parameters.Add("@surname", MySqlDbType.VarChar).Value = userModel.LastName;
                 command.Parameters.Add("@m", MySqlDbType.VarChar).Value = userModel.Email;
@@ -63,12 +64,28 @@ namespace Uslugi_application_user.Repositories
             using (var connection = GetConnection())
             using (var command = new MySqlCommand())
             {
+                string passUserDB="";
                 connection.Open();
                 command.Connection = connection;
-                command.CommandText = "SELECT * FROM `users` WHERE `login` = @username AND `pass` = @password";
+                command.CommandText = "SELECT * FROM `users` WHERE `login` = @username";
                 command.Parameters.Add("@username", MySqlDbType.VarChar).Value = credentital.UserName;
-                command.Parameters.Add("@password", MySqlDbType.VarChar).Value = credentital.Password;
-                validUser = command.ExecuteScalar() == null ? false : true;
+                MySqlDataReader data = command.ExecuteReader();
+                if(data.HasRows)
+                {
+                    while (data.Read())
+                    {
+                        passUserDB = Convert.ToString(data.GetValue(2));
+                    }
+                    
+                }
+                if(BCrypt.Net.BCrypt.Verify(Convert.ToString(credentital.Password), passUserDB))
+                {
+                    validUser = true;
+                }
+                else
+                {
+                    validUser = false;
+                }
             }
             return validUser;
         }
@@ -144,11 +161,12 @@ namespace Uslugi_application_user.Repositories
             using (var connection = GetConnection())
             using (var command = new MySqlCommand())
             {
+                string a = BCrypt.Net.BCrypt.HashPassword(pass);
                 connection.Open();
                 command.Connection = connection;
                 command.CommandText = "UPDATE users SET pass=@npass WHERE mail = @m";
                 command.Parameters.Add("@m", MySqlDbType.VarChar).Value = mail;
-                command.Parameters.Add("@npass", MySqlDbType.VarChar).Value = pass;
+                command.Parameters.Add("@npass", MySqlDbType.VarChar).Value = a;
                 command.ExecuteNonQuery();
             }
         }

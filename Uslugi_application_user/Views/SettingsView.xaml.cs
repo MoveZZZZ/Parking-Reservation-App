@@ -76,7 +76,7 @@ namespace Uslugi_application_user.Views
         private void appDelReserv_Click(object sender, RoutedEventArgs e)
         {
             string passUser = new NetworkCredential("", txtPassword.Password).Password;
-            if (passUser != passUserEnd.Text.ToString())
+            if (!BCrypt.Net.BCrypt.Verify(passUser, passUserEnd.Text.ToString()))
             {
                 errSettings.Text = "* niepoprawne hasło!";
             }
@@ -153,7 +153,7 @@ namespace Uslugi_application_user.Views
         private void appDelAcc_Click(object sender, RoutedEventArgs e)
         {
             string passUser = new NetworkCredential("", txtPassword.Password).Password;
-            if (passUser != passUserEnd.Text.ToString())
+            if (!BCrypt.Net.BCrypt.Verify(passUser, passUserEnd.Text.ToString()))
             {
                 errSettings.Text = "* niepoprawne hasło!";
             }
@@ -231,8 +231,8 @@ namespace Uslugi_application_user.Views
 
             string passNew = new NetworkCredential("", txtNewPass.Password).Password;
             string passUser = new NetworkCredential("", txtPassword.Password).Password;
-
-            if (passUser != passUserEnd.Text.ToString())
+            string abc = passUserEnd.Text.ToString();
+            if (!BCrypt.Net.BCrypt.Verify(passUser, passUserEnd.Text.ToString()))
             {
                 errSettings.Text = "* niepoprawne tymczasowe hasło!";
             }
@@ -242,11 +242,11 @@ namespace Uslugi_application_user.Views
             }
             else
             {
-
+                string a = BCrypt.Net.BCrypt.HashPassword(passNew);
                 DB db = new DB();
                 MySqlCommand com = new MySqlCommand("UPDATE `users` SET `pass` = @npas WHERE `userID` = @uid", db.getConnection());
                 com.Parameters.Add("@uid", MySqlDbType.Int32).Value = Convert.ToInt32(idUser.Text.ToString());
-                com.Parameters.Add("@npas", MySqlDbType.VarChar).Value = passNew;
+                com.Parameters.Add("@npas", MySqlDbType.VarChar).Value = a;
                 db.openConnection();
                 if (com.ExecuteNonQuery() == 1)
                 {
@@ -302,7 +302,7 @@ namespace Uslugi_application_user.Views
             {
                 errSettings.Text = "* tzki użytkownik już istneje!";
             }
-            else if(passUser!=passUserEnd.Text.ToString())
+            else if(!BCrypt.Net.BCrypt.Verify(passUser, passUserEnd.Text.ToString()))
             {
                 errSettings.Text = "* niepoprawne hasło!";
             }
@@ -366,7 +366,7 @@ namespace Uslugi_application_user.Views
             {
                 errSettings.Text = "* nazwisko musi być >3 i <10 znaków!";
             }
-            else if (passUser != passUserEnd.Text.ToString())
+            else if (!BCrypt.Net.BCrypt.Verify(passUser, passUserEnd.Text.ToString()))
             {
                 errSettings.Text = "* niepoprawne hasło!";
             }
@@ -432,7 +432,7 @@ namespace Uslugi_application_user.Views
             {
                 errSettings.Text = "* taki mail juz jest zarejstrowany!";
             }
-            else if (passUser != passUserEnd.Text.ToString())
+            else if (!BCrypt.Net.BCrypt.Verify(passUser, passUserEnd.Text.ToString()))
             {
                 errSettings.Text = "* niepoprawne hasło!";
             }
