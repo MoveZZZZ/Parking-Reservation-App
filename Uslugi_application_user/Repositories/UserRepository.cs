@@ -78,14 +78,22 @@ namespace Uslugi_application_user.Repositories
                     }
                     
                 }
-                if(BCrypt.Net.BCrypt.Verify(Convert.ToString(credentital.Password), passUserDB))
+               try
                 {
-                    validUser = true;
+                    if (BCrypt.Net.BCrypt.Verify(Convert.ToString(credentital.Password), passUserDB))
+                    {
+                        validUser = true;
+                    }
+                    else
+                    {
+                        validUser = false;
+                    }
                 }
-                else
+                catch
                 {
                     validUser = false;
                 }
+
             }
             return validUser;
         }
